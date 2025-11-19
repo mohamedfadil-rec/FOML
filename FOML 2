@@ -1,0 +1,55 @@
+# 📘 Simple Linear Regression using Least Squares Method (from scratch)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# -----------------------------
+# Step 1: Input Data
+# -----------------------------
+# Example: Hours studied vs Marks obtained
+x = np.array([1, 2, 3, 4, 5])   # Independent variable
+y = np.array([2, 4, 5, 4, 5])   # Dependent variable
+
+# -----------------------------
+# Step 2: Calculate Mean
+# -----------------------------
+mean_x = np.mean(x)
+mean_y = np.mean(y)
+
+# -----------------------------
+# Step 3: Calculate coefficients (slope and intercept)
+# Formula:
+# b1 = Σ(x - mean_x)*(y - mean_y) / Σ(x - mean_x)^2
+# b0 = mean_y - b1*mean_x
+# -----------------------------
+numerator = np.sum((x - mean_x) * (y - mean_y))
+denominator = np.sum((x - mean_x)**2)
+b1 = numerator / denominator
+b0 = mean_y - b1 * mean_x
+
+print("=== Simple Linear Regression using Least Squares ===")
+print(f"Slope (b1): {b1:.2f}")
+print(f"Intercept (b0): {b0:.2f}")
+
+# -----------------------------
+# Step 4: Predict values
+# -----------------------------
+y_pred = b0 + b1 * x
+
+# -----------------------------
+# Step 5: Plot the Regression Line
+# -----------------------------
+plt.scatter(x, y, color='blue', label='Actual Data')
+plt.plot(x, y_pred, color='red', label='Regression Line')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Simple Linear Regression using Least Squares Method')
+plt.legend()
+plt.show()
+
+# -----------------------------
+# Step 6: Predict for a new value
+# -----------------------------
+x_new = 6
+y_new = b0 + b1 * x_new
+print(f"Predicted value of Y when X = {x_new} → {y_new:.2f}")
